@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+typedef struct Node {
+	int date;
+	struct Node *next;
+} Node;
+
+void insert(Node *p, int x) {
+	Node *new = (Node *)malloc(sizeof(Node));
+	new->date = x;
+	new->next = p->next;
+	p->next = new;
+}
+
+void print(Node *head) {
+	Node *p;
+	system("cls");
+	printf("\n*** Elementos da Lista ***\n");
+	for(p=head->next; p!=NULL; p=p->next) {
+		printf("\n[ %d ]", p->date);
+	}
+}
+
+void showMenu() {
+	printf("\n\n---------------\n");
+	printf("1. Inserir\n");
+	printf("2. Mostrar\n");
+	printf("3. Sair\n");
+	printf("---------------\n");
+	printf("> ");
+}
+
+int main() {
+	setlocale(LC_ALL, "Portuguese");
+	Node *list = NULL;
+	list = (Node *)malloc(sizeof(Node));
+	int op, valor;
+	
+	do {
+		showMenu();
+		scanf("%d", &op);
+		
+		switch(op) {
+		case 1:
+			printf("\nAdd valor: ");
+			scanf("%d", &valor);
+			insert(list, valor);
+			system("cls");
+			break;
+		case 2:
+			print(list);
+			break;
+		case 3:
+			printf("\nFim do Programa\n");
+			break;
+		default:
+			printf("\nOpção inválida.\n");
+		}
+		
+		
+	} while(op != 3);
+	
+	return 0;
+}
