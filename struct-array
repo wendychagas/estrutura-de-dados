@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
+
+#define PAUSE system("pause")
+#define ANOATUAL 2023
+#define LISTAP 3
+
+typedef struct Data {
+	int dia, mes, ano;
+} Data;
+
+typedef struct Pessoa {
+	char nome[50];
+	Data aniversario;
+	int idade;
+} Pessoa;
+
+
+int main(void) {
+	setlocale(LC_ALL, "");
+	
+	Pessoa p[LISTAP];
+	
+	// entrada;
+	for(int i=0; i<LISTAP; i++) {
+		printf("\nNome: ");
+		fgets(p[i].nome, 50, stdin);
+		fflush(stdin);
+		
+		printf("Data de Nascimento\n");
+		printf("Dia: ");
+		scanf("%d", &p[i].aniversario.dia);
+		fflush(stdin);
+		
+		printf("Mês: ");
+		scanf("%d", &p[i].aniversario.mes);
+		fflush(stdin);
+		printf("Ano: ");
+		scanf("%d", &p[i].aniversario.ano);
+		fflush(stdin);
+		
+		// processamento;
+		p[i].idade = (ANOATUAL-p[i].aniversario.ano);
+	}
+	
+	
+	// saída;
+	for(int i=0; i<LISTAP; i++) {
+		printf("\nNome: %s", p[i].nome);
+		printf("Nascimento: %d/%d/%d\n", p[i].aniversario.dia, p[i].aniversario.mes, p[i].aniversario.ano);
+		printf("Idade: %d anos.\n", p[i].idade);
+	}
+	
+	PAUSE;
+	return 0;
+}
